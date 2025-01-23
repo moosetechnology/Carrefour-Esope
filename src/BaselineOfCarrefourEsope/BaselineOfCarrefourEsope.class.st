@@ -53,7 +53,7 @@ BaselineOfCarrefourEsope >> definePackages: spec [
 		package: 'Carrefour-Esope'
 			with: [ spec requires: #('CarrefourFortran' 'Carrefour-Esope-Model') ] ;
 		package: 'Carrefour-Esope-Tests'
-			with: [ spec requires: #('Carrefour-Fortran') ]
+			with: [ spec requires: #('CarrefourFortran') ]
 
 
 ]
