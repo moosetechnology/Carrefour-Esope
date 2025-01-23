@@ -23,7 +23,7 @@ BaselineOfCarrefourEsope >> defineDependencies: spec [
 		baseline: 'FASTEsope'
 		with: [ spec
 				loads: #('default');
-				repository: 'github://moosetechnology/FAST-Esope/src' ] ;
+				repository: 'github://moosetechnology/FAST-Esope' ] ;
 
 		baseline: 'FamixEsope'
 		with: [ spec
