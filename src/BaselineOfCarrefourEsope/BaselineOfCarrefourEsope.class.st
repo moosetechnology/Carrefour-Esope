@@ -25,10 +25,10 @@ BaselineOfCarrefourEsope >> defineDependencies: spec [
 				loads: #('default');
 				repository: 'github://moosetechnology/FAST-Esope' ] ;
 
-		baseline: 'FamixEsope'
+		baseline: 'Esope'
 		with: [ spec
 				loads: #('default');
-				repository: 'github://moosetechnology/Famix-Esope' ] ;
+				repository: 'github://moosetechnology/Esope' ] ;
 
 		baseline: 'Carrefour-Fortran'
 		with: [ spec
@@ -48,7 +48,7 @@ BaselineOfCarrefourEsope >> defineGroups: spec [
 BaselineOfCarrefourEsope >> definePackages: spec [
 	spec
 		package: 'Carrefour-Esope-Model'
-			with: [ spec requires: #('FamixEsope' 'FASTEsope') ];
+			with: [ spec requires: #('Esope' 'FASTEsope') ];
 		package: 'Carrefour-Esope-Model-Generator' ;
 		package: 'Carrefour-Esope'
 			with: [ spec requires: #('Carrefour-Fortran' 'Carrefour-Esope-Model') ] ;
