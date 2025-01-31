@@ -2,11 +2,11 @@ Extension { #name : 'FASTEsopePointerDeclarationStatement' }
 
 { #category : '*Carrefour-Esope-Model-accessing' }
 FASTEsopePointerDeclarationStatement >> famix [
-	"Relation named: #famix type: #FamixF77Variable opposite: #fast"
+	"Relation named: #famix type: #FamixEsopePointer opposite: #fast"
 
 	<generated>
 	<derived>
-	<FMProperty: #famix type: #FamixF77Variable opposite: #fast>
+	<FMProperty: #famix type: #FamixEsopePointer opposite: #fast>
 	<package: #'Carrefour-Esope-Model'>
 	^ self attributeAt: #famix ifAbsent: [ nil ]
 ]
