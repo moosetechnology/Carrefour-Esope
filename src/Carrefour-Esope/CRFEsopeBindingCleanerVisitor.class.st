@@ -6,6 +6,17 @@ Class {
 }
 
 { #category : 'visiting' }
+CRFEsopeBindingCleanerVisitor >> fullClean: fastModel [
+	"as advertized: tries its best to remove everything from the fastModel to allow
+	 garbage collecting the memory used"
+
+	fastModel flushPrivateState.
+	fastModel flush.
+	self accept: fastModel.
+	fastModel removeAll
+]
+
+{ #category : 'visiting' }
 CRFEsopeBindingCleanerVisitor >> visitFASTEsopeSegment: aFASTEsopeSegment [
 
 	aFASTEsopeSegment famix: nil.
