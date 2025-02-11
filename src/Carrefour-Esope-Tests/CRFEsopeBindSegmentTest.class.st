@@ -14,7 +14,7 @@ CRFEsopeBindSegmentTest >> jsonImporterClass [
 { #category : 'tests' }
 CRFEsopeBindSegmentTest >> testSegmentEmpty [
 
-	| entities fmx fast |
+	| fmx fast |
 	self
 		createModels: '{"meta":{"miVersion":"fortran77","miFilename":"/home/anquetil/Pharo/images/fast-esope-250120/srcCode.f"},"program_units":[{"anno":[],"blocks":[{"anno":[],"comment":"@_   segment, book","span":"(2:1)-(2:19)","tag":"comment"},{"anno":[],"comment":"@_   end segment","span":"(3:1)-(3:17)","tag":"comment"}],"name":"main","span":"(1:7)-(4:17)","subprograms":null,"tag":"main"}]}'
 		forCode:
@@ -24,17 +24,14 @@ c@_   end segment
       end program
 '.
 
-	(famixModel entityNamed: 'book') bindFastModel: fastModel.
+	fmx := famixModel entityNamed: 'book'.
+	fmx bindFastModel: fastModel.
 
-	entities := famixModel allWithType: FamixEsopeSegment.
-
-	self assert: entities size equals: 1.
-	fmx := entities anyOne.
 	fast := fmx fast.
-
 	self assert: fast isNotNil.
 	self assert: fast class equals: FASTEsopeSegment.
-	self assert: fast name equals: fmx name
+	self assert: fast name equals: fmx name.
+	self assert: fast famix equals: fmx
 
 ]
 
@@ -59,13 +56,13 @@ c@_   end segment
 	entities := famixModel allWithType: FamixFortranAttribute.
 
 	self assert: entities size equals: 3.
-
 	entities do: [ :fmx |
 		fast := fmx fastDeclaration.
 
 		self assert: fast isNotNil.
 		self assert: fast class equals: FASTFortranVariableDeclarator.
-		self assert: fast name equals: fmx name
+		self assert: fast name equals: fmx name.
+		self assert: fast famixDeclaration equals: fmx
 	]
 
 ]
