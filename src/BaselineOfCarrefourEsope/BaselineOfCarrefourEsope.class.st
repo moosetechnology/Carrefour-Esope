@@ -10,8 +10,11 @@ BaselineOfCarrefourEsope >> baseline: spec [
 	<baseline>
 	spec
 		for: #common
-		do: [ spec blessing: #baseline.
+		do: [ 
+			spec blessing: #baseline.
 			spec description: 'Binding FAST and Famix for Esope (Segment)'.
+			spec repository:
+				'https://github.com/moosetechnology/Carrefour-Esope:main'.
 			self defineDependencies: spec.
 			self definePackages: spec.
 			self defineGroups: spec ]
