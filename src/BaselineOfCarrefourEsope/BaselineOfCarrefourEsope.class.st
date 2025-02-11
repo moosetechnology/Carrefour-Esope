@@ -25,18 +25,18 @@ BaselineOfCarrefourEsope >> defineDependencies: spec [
 	spec
 		baseline: 'Esope'
 		with: [ spec
-				loads: #('default');
-				repository: 'https://github.com/moosetechnology/Esope' ] ;
+				loads: #('all');
+				repository: 'github://moosetechnology/Esope' ] ;
 
 		baseline: 'FASTEsope'
 		with: [ spec
 				loads: #('default');
-				repository: 'https://github.com/moosetechnology/FAST-Esope' ] ;
+				repository: 'github://moosetechnology/FAST-Esope' ] ;
 
 		baseline: 'CarrefourFortran'
 		with: [ spec
 				loads: #('default');
-				repository: 'https://github.com/moosetechnology/Carrefour-Fortran' ]
+				repository: 'github://moosetechnology/Carrefour-Fortran' ]
 
 ]
 
