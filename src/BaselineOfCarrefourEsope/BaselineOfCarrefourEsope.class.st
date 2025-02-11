@@ -42,6 +42,7 @@ BaselineOfCarrefourEsope >> defineDependencies: spec [
 
 { #category : 'baselines' }
 BaselineOfCarrefourEsope >> defineGroups: spec [
+	
 	spec
 		group: 'core' with: #('Carrefour-Esope-Model' 'Carrefour-Esope' 'Carrefour-Esope-Tests');
 		group: 'default' with: #('core')
