@@ -6,7 +6,7 @@ Class {
 }
 
 { #category : 'visiting' }
-CRFEsopeBindingCleanerVisitor >> fullClean: fastModel [
+CRFEsopeBindingCleanerVisitor >> cleanModel: fastModel [
 	"as advertized: tries its best to remove everything from the fastModel to allow
 	 garbage collecting the memory used"
 
