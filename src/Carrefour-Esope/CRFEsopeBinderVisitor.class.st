@@ -12,6 +12,16 @@ CRFEsopeBinderVisitor >> fastMetamodel [
 ]
 
 { #category : 'visiting' }
+CRFEsopeBinderVisitor >> visitFASTEsopePointerDeclarationStatement: aFASTEsopePointerDeclarationStatement [
+
+	aFASTEsopePointerDeclarationStatement pointerDeclarators
+		do: [ :decl |
+			(decl attributeAt: #variableDeclarator ifAbsent: [ nil ]) 
+				ifNotNil: [ :variableDeclarator | variableDeclarator accept: self ]
+		]
+]
+
+{ #category : 'visiting' }
 CRFEsopeBinderVisitor >> visitFASTEsopeSegment: aFASTEsopeSegment [
 
 	| famix |
