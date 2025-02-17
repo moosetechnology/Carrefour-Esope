@@ -26,15 +26,15 @@ FamixEsopeSegment >> bindFastModel: fastModel [
 { #category : '*Carrefour-Esope' }
 FamixEsopeSegment >> importFASTModel [
 
-	| fortranCode tempModel segmentSource |
+	| fortranCode tempModel |
 	self assert: self sourceAnchor isNotNil.
 	
-	segmentSource := 'c@_   ', self sourceAnchor sourceText.
+	sourceAnchor endLine: sourceAnchor endLine + 1.
 
 	fortranCode := String streamContents:  [  :aStream | 
 		FortranProjectImporter new 
-			writeFakeEsopeProgramUnit: 'fakesubroutine' 
-			from: segmentSource
+			writeFakeEsopeProgramUnit: self name 
+			from: self sourceAnchor sourceText
 			on: aStream
 	].
 
