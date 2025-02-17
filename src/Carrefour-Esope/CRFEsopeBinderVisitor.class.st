@@ -5,27 +5,10 @@ Class {
 	#package : 'Carrefour-Esope'
 }
 
-{ #category : 'api' }
-CRFEsopeBinderVisitor >> bindFastModel: fastModel toFamixEntity: aFamixEntity [
-	
-	self famixEntity: aFamixEntity.
-	fastModel metamodel: self fastMetamodel.
-
-	(fastModel allWithSubTypesOf: FASTEsopeSegment)
-		do: [ :rootEntity | rootEntity accept: self ].
-
-]
-
 { #category : 'accessing' }
 CRFEsopeBinderVisitor >> fastMetamodel [
 
 	^CRFEsopeModel metamodel
-]
-
-{ #category : 'search famix' }
-CRFEsopeBinderVisitor >> rootEntitiesIn: fastModel [
-
-	^fastModel allWithSubTypesOf: FASTEsopeSegment
 ]
 
 { #category : 'visiting' }
