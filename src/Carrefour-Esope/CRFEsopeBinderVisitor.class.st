@@ -45,6 +45,12 @@ CRFEsopeBinderVisitor >> visitFASTEsopeSegdes: aFASTEsopeSegdes [
 ]
 
 { #category : 'visiting' }
+CRFEsopeBinderVisitor >> visitFASTEsopeSegini: aFASTEsopeSegini [
+
+		self visitFASTEsopeSegCommand: aFASTEsopeSegini
+]
+
+{ #category : 'visiting' }
 CRFEsopeBinderVisitor >> visitFASTEsopeSegment: aFASTEsopeSegment [
 
 	| famix |
@@ -56,4 +62,16 @@ CRFEsopeBinderVisitor >> visitFASTEsopeSegment: aFASTEsopeSegment [
 
 	aFASTEsopeSegment statements do: [ :each | each accept: self ].
 
+]
+
+{ #category : 'visiting' }
+CRFEsopeBinderVisitor >> visitFASTEsopeSegprt: aFASTEsopeSegprt [
+
+		self visitFASTEsopeSegCommand: aFASTEsopeSegprt
+]
+
+{ #category : 'visiting' }
+CRFEsopeBinderVisitor >> visitFASTEsopeSegsup: aFASTEsopeSegsup [
+
+		self visitFASTEsopeSegCommand: aFASTEsopeSegsup
 ]
