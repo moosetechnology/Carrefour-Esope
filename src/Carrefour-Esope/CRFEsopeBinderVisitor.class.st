@@ -5,12 +5,6 @@ Class {
 	#package : 'Carrefour-Esope'
 }
 
-{ #category : 'accessing' }
-CRFEsopeBinderVisitor >> fastMetamodel [
-
-	^CRFEsopeModel metamodel
-]
-
 { #category : 'visiting' }
 CRFEsopeBinderVisitor >> visitFASTEsopeIncludeStatement: aFASTEsopeIncludeStatement [ 
 
