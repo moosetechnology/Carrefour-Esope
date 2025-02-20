@@ -12,6 +12,11 @@ CRFEsopeBinderVisitor >> fastMetamodel [
 ]
 
 { #category : 'visiting' }
+CRFEsopeBinderVisitor >> visitFASTEsopeIncludeStatement: aFASTEsopeIncludeStatement [ 
+
+]
+
+{ #category : 'visiting' }
 CRFEsopeBinderVisitor >> visitFASTEsopePointerDeclarationStatement: aFASTEsopePointerDeclarationStatement [
 
 	aFASTEsopePointerDeclarationStatement pointerDeclarators
@@ -19,6 +24,30 @@ CRFEsopeBinderVisitor >> visitFASTEsopePointerDeclarationStatement: aFASTEsopePo
 			(decl attributeAt: #variableDeclarator ifAbsent: [ nil ]) 
 				ifNotNil: [ :variableDeclarator | variableDeclarator accept: self ]
 		]
+]
+
+{ #category : 'visiting' }
+CRFEsopeBinderVisitor >> visitFASTEsopeSegCommand: aFASTEsopeSegCommand [
+
+	aFASTEsopeSegCommand variables do: [ :variable | variable accept: self ]
+]
+
+{ #category : 'visiting' }
+CRFEsopeBinderVisitor >> visitFASTEsopeSegact: aFASTEsopeSegact [ 
+
+		self visitFASTEsopeSegCommand: aFASTEsopeSegact 
+]
+
+{ #category : 'visiting' }
+CRFEsopeBinderVisitor >> visitFASTEsopeSegadj: aFASTEsopeSegadj [ 
+
+		self visitFASTEsopeSegCommand: aFASTEsopeSegadj
+]
+
+{ #category : 'visiting' }
+CRFEsopeBinderVisitor >> visitFASTEsopeSegdes: aFASTEsopeSegdes [ 
+
+		self visitFASTEsopeSegCommand: aFASTEsopeSegdes 
 ]
 
 { #category : 'visiting' }
