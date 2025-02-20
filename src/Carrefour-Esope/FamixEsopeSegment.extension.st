@@ -38,7 +38,7 @@ FamixEsopeSegment >> importFASTModel [
 			on: aStream
 	].
 
-	tempModel := FASTFortranImporter onSourceString: fortranCode.
+	tempModel := self mooseModel fastImporter onSourceString: fortranCode.
 
 	tempModel remove: (tempModel allWithType: FASTFortranSubroutine) first.
 	
