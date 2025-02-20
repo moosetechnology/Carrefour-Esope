@@ -11,3 +11,9 @@ FASTEsopeModel >> carrefourBinderVisitor [
 
 	^ CRFEsopeBinderVisitor new
 ]
+
+{ #category : '*Carrefour-Esope' }
+FASTEsopeModel >> setMetamodelToCarrefour [
+
+	self metamodel: CRFEsopeModel metamodel
+]

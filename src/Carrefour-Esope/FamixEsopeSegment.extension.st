@@ -7,8 +7,8 @@ FamixEsopeSegment >> bindFASTModel [
 	self assert: self sourceAnchor isNotNil.
 
 	fastModel := self importFASTModel
-		             metamodel: CRFFModel metamodel;
-		             yourself.
+		setMetamodelToCarrefour ;
+		yourself.
 
 	self bindFastModel: fastModel.
 
