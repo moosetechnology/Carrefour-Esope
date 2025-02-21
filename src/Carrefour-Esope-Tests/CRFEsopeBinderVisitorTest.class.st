@@ -21,6 +21,31 @@ CRFEsopeBinderVisitorTest >> newFamixModel [
 ]
 
 { #category : 'tests' }
+CRFEsopeBinderVisitorTest >> testEsopeIncludeStatement [
+
+	| entities fmx fast |	
+
+	self
+		createModels: '{"meta":{"miVersion":"fortran77","miFilename":"./srcCodeOrigin.f"},"program_units":[{"anno":[],"blocks":[{"anno":[],"comment":"@_#include \"toto.seg\"","span":"(2:1)-(2:22)","tag":"comment"}],"name":"main","span":"(1:7)-(3:9)","subprograms":null,"tag":"main"}]}'
+		forCode:
+'      program main
+C@_#include "toto.seg"
+      end
+'.
+
+	(famixModel entityNamed: 'main') bindFastModel: fastModel.
+
+
+	entities := famixModel allWithType: FamixF77Include.
+
+	self assert: entities size equals: 1.
+	fmx := entities anyOne.
+	fast := fmx fastInclude.
+
+	self assert: fast filename equals: 'toto.seg'
+]
+
+{ #category : 'tests' }
 CRFEsopeBinderVisitorTest >> testMypntInvocation [
 
 	| entities fmx fast |
