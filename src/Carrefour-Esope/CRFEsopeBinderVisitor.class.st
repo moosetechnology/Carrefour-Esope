@@ -8,6 +8,12 @@ Class {
 { #category : 'visiting' }
 CRFEsopeBinderVisitor >> visitFASTEsopeIncludeStatement: aFASTEsopeIncludeStatement [ 
 
+	| famix |
+
+	famix := famixEntity includes select: [ :each | each filename asLowercase = aFASTEsopeIncludeStatement filename asLowercase ].
+
+	self assert: (famix size = 1).
+	famix anyOne fastInclude: aFASTEsopeIncludeStatement
 ]
 
 { #category : 'visiting' }
