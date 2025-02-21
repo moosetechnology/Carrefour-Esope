@@ -28,7 +28,8 @@ CRFEsopeMetamodelGenerator class >> submetamodels [
 
 	^{
 		FamixEsopeGenerator .
-		FASTEsopeGenerator 
+		FASTEsopeGenerator .
+		FamixFortran77Generator
 	}
 ]
 
