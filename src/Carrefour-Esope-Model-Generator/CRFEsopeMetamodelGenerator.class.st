@@ -42,7 +42,7 @@ CRFEsopeMetamodelGenerator >> defineClasses [
 	fastSegment := self remoteEntity: #Segment withPrefix: #FASTEsope.
 	
 	fastIncludeStatement := self remoteEntity: #IncludeStatement withPrefix: #FASTEsope.
-	famixInclude := self remoteEntity: #Include withPrefix: #FamixFortran.
+	famixInclude := self remoteEntity: #Include withPrefix: #FamixF77.
 
 ]
 
