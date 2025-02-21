@@ -18,7 +18,7 @@ FamixEsopeSegment >> bindFASTModel [
 { #category : '*Carrefour-Esope' }
 FamixEsopeSegment >> bindFastModel: fastModel [
 
-	CRFEsopeBinderVisitor new
+	fastModel carrefourBinderVisitor
 		bindFastModel: fastModel
 		toFamixEntity: self
 ]

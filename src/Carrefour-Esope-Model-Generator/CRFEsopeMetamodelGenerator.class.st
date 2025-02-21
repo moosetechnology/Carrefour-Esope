@@ -3,7 +3,9 @@ Class {
 	#superclass : 'FamixMetamodelGenerator',
 	#instVars : [
 		'famixSegment',
-		'fastSegment'
+		'fastSegment',
+		'fastIncludeStatement',
+		'famixInclude'
 	],
 	#category : 'Carrefour-Esope-Model-Generator',
 	#package : 'Carrefour-Esope-Model-Generator'
@@ -26,7 +28,8 @@ CRFEsopeMetamodelGenerator class >> submetamodels [
 
 	^{
 		FamixEsopeGenerator .
-		FASTEsopeGenerator 
+		FASTEsopeGenerator .
+		FamixFortran77Generator
 	}
 ]
 
@@ -36,9 +39,10 @@ CRFEsopeMetamodelGenerator >> defineClasses [
 	super defineClasses.
 
 	famixSegment := self remoteEntity: #Segment withPrefix: #FamixEsope.
-
 	fastSegment := self remoteEntity: #Segment withPrefix: #FASTEsope.
-
+	
+	fastIncludeStatement := self remoteEntity: #IncludeStatement withPrefix: #FASTEsope.
+	famixInclude := self remoteEntity: #Include withPrefix: #FamixF77.
 
 ]
 
@@ -46,5 +50,7 @@ CRFEsopeMetamodelGenerator >> defineClasses [
 CRFEsopeMetamodelGenerator >> defineRelations [
 	super defineRelations.
 
-	(famixSegment property: #fast) - (fastSegment property: #famix)
+	(famixSegment property: #fast) - (fastSegment property: #famix).
+
+	(famixInclude property: #fastInclude) - (fastIncludeStatement property: #famixInclude)
 ]
