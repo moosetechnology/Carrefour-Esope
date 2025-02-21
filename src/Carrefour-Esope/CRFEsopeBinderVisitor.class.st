@@ -10,7 +10,8 @@ CRFEsopeBinderVisitor >> visitFASTEsopeIncludeStatement: aFASTEsopeIncludeStatem
 
 	| famix |
 
-	famix := famixEntity includes select: [ :each | each filename asLowercase = aFASTEsopeIncludeStatement filename asLowercase ].
+	famix := famixEntity includes 
+		select: [ :each | each filename asLowercase = aFASTEsopeIncludeStatement filename asLowercase ].
 
 	self assert: (famix size = 1).
 	famix anyOne fastInclude: aFASTEsopeIncludeStatement
