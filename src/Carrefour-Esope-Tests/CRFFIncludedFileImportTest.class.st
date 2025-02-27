@@ -27,6 +27,64 @@ CRFFIncludedFileImportTest >> newFamixModel [
 ]
 
 { #category : 'tests' }
+CRFFIncludedFileImportTest >> testBindingOneSegment [
+
+	|  entities fmx fast |
+	self
+		createModels: '{"meta":{"miVersion":"fortran77","miFilename":"./srcCodeOrigin.f"},"program_units":[{"anno":[],"arguments":null,"blocks":[{"anno":[],"comment":" this is an included file","span":"(2:1)-(2:26)","tag":"comment"},{"anno":[],"comment":"@_   segment, truc","span":"(3:1)-(3:19)","tag":"comment"},{"anno":[],"comment":"@_   endsegment","span":"(4:1)-(4:16)","tag":"comment"}],"name":"_$somefile_inc","options":[null,null],"span":"(1:7)-(5:9)","subprograms":null,"tag":"subroutine"}]}'
+		forCode:
+'      subroutine _$somefile_inc
+* this is an included file
+c@_   segment, truc
+c@_   endsegment
+      end
+'.
+	
+	fastModel cleanupFakeIncludeSubroutine.
+
+	(famixModel entityNamed: '_$somefile_inc') bindFastModel: fastModel.
+
+	entities := famixModel allWithType: FamixEsopeSegment.
+
+	self assert: entities size equals: 1.
+	fmx := entities anyOne.
+	fast := fmx fast.
+
+	self assert: fast isNotNil.
+	self assert: fast name equals: 'truc'.
+	self assert: fast famix equals: fmx.
+]
+
+{ #category : 'tests' }
+CRFFIncludedFileImportTest >> testBindingOneSegmentWithOneField [
+
+	|  entities fmx fast |
+	self
+		createModels: '{"meta":{"miVersion":"fortran77","miFilename":"./srcCodeOrigin.f"},"program_units":[{"anno":[],"arguments":null,"blocks":[{"anno":[],"comment":"@_   segment, truc","span":"(2:1)-(2:19)","tag":"comment"},{"anno":[],"label":null,"span":"(3:7)-(3:19)","statement":{"anno":[],"attributes":null,"declarators":{"anno":[],"list":[{"anno":[],"initial":null,"length":null,"span":"(3:15)-(3:19)","type":"scalar","variable":{"anno":[],"span":"(3:15)-(3:19)","tag":"value","value":{"contents":"field","tag":"variable"}}}],"span":"(3:15)-(3:19)"},"span":"(3:7)-(3:19)","tag":"declaration","type":{"anno":[],"base_type":"integer","selector":null,"span":"(3:7)-(3:13)"}},"tag":"statement"},{"anno":[],"comment":"@_   endsegment","span":"(4:1)-(4:16)","tag":"comment"}],"name":"_$somefile_inc","options":[null,null],"span":"(1:7)-(5:9)","subprograms":null,"tag":"subroutine"}]}'
+		forCode:
+'      subroutine _$somefile_inc
+c@_   segment, truc
+      integer field
+c@_   endsegment
+      end
+'.
+	
+	fastModel cleanupFakeIncludeSubroutine.
+
+	(famixModel entityNamed: '_$somefile_inc') bindFastModel: fastModel.
+
+	entities := famixModel allWithType: FamixFortranAttribute.
+
+	self assert: entities size equals: 1.
+	fmx := entities anyOne.
+	fast := fmx fastDeclaration.
+
+	self assert: fast isNotNil.
+	self assert: fast name equals: 'field'.
+	self assert: fast famixDeclaration equals: fmx.
+]
+
+{ #category : 'tests' }
 CRFFIncludedFileImportTest >> testOneSegment [
 
 	| tempFastModel includedFile |
@@ -71,7 +129,7 @@ CRFFIncludedFileImportTest >> testVariableDeclarations [
 
 	includedFile := (tempFastModel allWithType: FASTFortranIncludedFile) anyOne.
 	
-	self assert: includedFile statements size equals: 3.
+	self assert: includedFile statementBlock  statements size equals: 3.
 	self assert: includedFile declarations size equals: 0
 ]
 
@@ -97,6 +155,6 @@ c@_   endsegment
 
 	includedFile := (tempFastModel allWithType: FASTFortranIncludedFile) anyOne.
 	
-	self assert: includedFile statements size equals: 2.
+	self assert: includedFile statementBlock statements size equals: 2.
 	self assert: includedFile declarations size equals: 1
 ]
