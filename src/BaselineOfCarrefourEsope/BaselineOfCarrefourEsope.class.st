@@ -49,7 +49,8 @@ BaselineOfCarrefourEsope >> defineGroups: spec [
 { #category : 'baselines' }
 BaselineOfCarrefourEsope >> definePackages: spec [
 	spec
-		package: 'Carrefour-Esope-Model-Generator' ;
+		package: 'Carrefour-Esope-Model-Generator' 
+			with: [ spec requires: #('Esope' 'FASTEsope') ];
 		package: 'Carrefour-Esope-Model'
 			with: [ spec requires: #('Esope' 'FASTEsope') ];
 		package: 'Carrefour-Esope'
