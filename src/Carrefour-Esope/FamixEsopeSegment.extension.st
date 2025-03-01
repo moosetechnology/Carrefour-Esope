@@ -26,9 +26,9 @@ FamixEsopeSegment >> bindFastModel: fastModel [
 { #category : '*Carrefour-Esope' }
 FamixEsopeSegment >> importFASTModel [
 
-	| fortranCode tempModel |
+	| fortranCode tempFastModel fakeSubroutine |
 	self assert: self sourceAnchor isNotNil.
-	
+
 	sourceAnchor endLine: sourceAnchor endLine + 1.
 
 	fortranCode := String streamContents:  [  :aStream | 
@@ -38,10 +38,14 @@ FamixEsopeSegment >> importFASTModel [
 			on: aStream
 	].
 
-	tempModel := self mooseModel fastImporter onSourceString: fortranCode.
+	tempFastModel := self mooseModel fastImporter onSourceString: fortranCode.
 
-	tempModel remove: (tempModel allWithType: FASTFortranSubroutine) first.
-	
-	^tempModel
+	fakeSubroutine := (tempFastModel allWithType: FASTFortranSubroutine) first.
+	fakeSubroutine statementBlock: nil.
+	fakeSubroutine programFile: nil.
+
+	tempFastModel remove: fakeSubroutine.
+
+	^tempFastModel
 
 ]
