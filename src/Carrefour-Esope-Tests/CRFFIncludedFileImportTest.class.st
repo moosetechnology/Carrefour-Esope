@@ -167,8 +167,11 @@ CRFFIncludedFileImportTest >> testBindingVariableDeclarations [
 
 { #category : 'tests' }
 CRFFIncludedFileImportTest >> testOneSegment [
+	"For included files, a fake subroutine is created to make it syntactically correct
+	 the esope importer removes it by calling #cleanupFakeIncludeSubroutine
+	Here we call the method directly"
 
-	| tempFastModel includedFile |
+	| includedFile |
 	self
 		createModels: '{"meta":{"miVersion":"fortran77","miFilename":"./srcCodeOrigin.f"},"program_units":[{"anno":[],"arguments":null,"blocks":[{"anno":[],"comment":" this is an included file","span":"(2:1)-(2:26)","tag":"comment"},{"anno":[],"comment":"@_   segment, truc","span":"(3:1)-(3:19)","tag":"comment"},{"anno":[],"comment":"@_   endsegment","span":"(4:1)-(4:16)","tag":"comment"}],"name":"_$somefile_inc","options":[null,null],"span":"(1:7)-(5:9)","subprograms":null,"tag":"subroutine"}]}'
 		forCode:
@@ -179,12 +182,12 @@ c@_   endsegment
       end
 '.
 
-	tempFastModel := (famixModel entityNamed: '_$somefile_inc') importFASTModel.
+	fastModel cleanupFakeIncludeSubroutine.
 
-	self assert: (tempFastModel allWithType: FASTFortranSubroutine) isEmpty.
-	self assert: (tempFastModel allWithType: FASTFortranIncludedFile) size equals: 1.
+	self assert: (fastModel allWithType: FASTFortranSubroutine) isEmpty.
+	self assert: (fastModel allWithType: FASTFortranIncludedFile) size equals: 1.
 
-	includedFile := (tempFastModel allWithType: FASTFortranIncludedFile) anyOne.
+	includedFile := (fastModel allWithType: FASTFortranIncludedFile) anyOne.
 	
 	self assert: includedFile declarations size equals: 1
 ]
@@ -192,7 +195,7 @@ c@_   endsegment
 { #category : 'tests' }
 CRFFIncludedFileImportTest >> testVariableDeclarations [
 
-	| tempFastModel includedFile |
+	| includedFile |
 	self
 		createModels: '{"meta":{"miVersion":"fortran77","miFilename":"srcCodeOrigin.f"},"program_units":[{"anno":[],"arguments":null,"blocks":[{"anno":[],"comment":" this is an included file","span":"(2:1)-(2:26)","tag":"comment"},{"anno":[],"label":null,"span":"(3:7)-(3:15)","statement":{"anno":[],"attributes":null,"declarators":{"anno":[],"list":[{"anno":[],"initial":null,"length":null,"span":"(3:15)-(3:15)","type":"scalar","variable":{"anno":[],"span":"(3:15)-(3:15)","tag":"value","value":{"contents":"x","tag":"variable"}}}],"span":"(3:15)-(3:15)"},"span":"(3:7)-(3:15)","tag":"declaration","type":{"anno":[],"base_type":"integer","selector":null,"span":"(3:7)-(3:13)"}},"tag":"statement"},{"anno":[],"label":null,"span":"(4:7)-(4:15)","statement":{"anno":[],"attributes":null,"declarators":{"anno":[],"list":[{"anno":[],"initial":null,"length":null,"span":"(4:15)-(4:15)","type":"scalar","variable":{"anno":[],"span":"(4:15)-(4:15)","tag":"value","value":{"contents":"y","tag":"variable"}}}],"span":"(4:15)-(4:15)"},"span":"(4:7)-(4:15)","tag":"declaration","type":{"anno":[],"base_type":"logical","selector":null,"span":"(4:7)-(4:13)"}},"tag":"statement"}],"name":"_$somefile_inc","options":[null,null],"span":"(1:7)-(5:9)","subprograms":null,"tag":"subroutine"}]}'
 		forCode:
@@ -203,12 +206,12 @@ CRFFIncludedFileImportTest >> testVariableDeclarations [
       end
 '.
 
-	tempFastModel := (famixModel entityNamed: '_$somefile_inc') importFASTModel.
+	fastModel cleanupFakeIncludeSubroutine.
 
-	self assert: (tempFastModel allWithType: FASTFortranSubroutine) isEmpty.
-	self assert: (tempFastModel allWithType: FASTFortranIncludedFile) size equals: 1.
+	self assert: (fastModel allWithType: FASTFortranSubroutine) isEmpty.
+	self assert: (fastModel allWithType: FASTFortranIncludedFile) size equals: 1.
 
-	includedFile := (tempFastModel allWithType: FASTFortranIncludedFile) anyOne.
+	includedFile := (fastModel allWithType: FASTFortranIncludedFile) anyOne.
 	
 	self assert: includedFile statementBlock  statements size equals: 3.
 	self assert: includedFile declarations size equals: 0
@@ -217,7 +220,7 @@ CRFFIncludedFileImportTest >> testVariableDeclarations [
 { #category : 'tests' }
 CRFFIncludedFileImportTest >> testVariableDeclarationsAndSegment [
 
-	| tempFastModel includedFile |
+	| includedFile |
 	self
 		createModels: '{"meta":{"miVersion":"fortran77","miFilename":"srcCodeOrigin.f"},"program_units":[{"anno":[],"arguments":null,"blocks":[{"anno":[],"comment":" this is an included file","span":"(2:1)-(2:26)","tag":"comment"},{"anno":[],"label":null,"span":"(3:7)-(3:15)","statement":{"anno":[],"attributes":null,"declarators":{"anno":[],"list":[{"anno":[],"initial":null,"length":null,"span":"(3:15)-(3:15)","type":"scalar","variable":{"anno":[],"span":"(3:15)-(3:15)","tag":"value","value":{"contents":"x","tag":"variable"}}}],"span":"(3:15)-(3:15)"},"span":"(3:7)-(3:15)","tag":"declaration","type":{"anno":[],"base_type":"integer","selector":null,"span":"(3:7)-(3:13)"}},"tag":"statement"},{"anno":[],"comment":"@_   segment, truc","span":"(4:1)-(4:19)","tag":"comment"},{"anno":[],"comment":"@_   endsegment","span":"(5:1)-(5:16)","tag":"comment"}],"name":"_$somefile_inc","options":[null,null],"span":"(1:7)-(6:9)","subprograms":null,"tag":"subroutine"}]}'
 		forCode:
@@ -229,12 +232,12 @@ c@_   endsegment
       end
 '.
 
-	tempFastModel := (famixModel entityNamed: '_$somefile_inc') importFASTModel.
+	fastModel cleanupFakeIncludeSubroutine.
 
-	self assert: (tempFastModel allWithType: FASTFortranSubroutine) isEmpty.
-	self assert: (tempFastModel allWithType: FASTFortranIncludedFile) size equals: 1.
+	self assert: (fastModel allWithType: FASTFortranSubroutine) isEmpty.
+	self assert: (fastModel allWithType: FASTFortranIncludedFile) size equals: 1.
 
-	includedFile := (tempFastModel allWithType: FASTFortranIncludedFile) anyOne.
+	includedFile := (fastModel allWithType: FASTFortranIncludedFile) anyOne.
 	
 	self assert: includedFile statementBlock statements size equals: 2.
 	self assert: includedFile declarations size equals: 1
