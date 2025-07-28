@@ -32,7 +32,7 @@ FamixEsopeSegment >> importFASTModel [
 	sourceAnchor endLine: sourceAnchor endLine + 1.
 
 	fortranCode := String streamContents:  [  :aStream | 
-		FortranProjectImporter new 
+		FamixFortranImporter new 
 			writeFakeEsopeProgramUnit: self name 
 			from: self sourceAnchor sourceText
 			on: aStream
