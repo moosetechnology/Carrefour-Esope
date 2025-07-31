@@ -3,7 +3,7 @@ Extension { #name : 'FASTEsopeModel' }
 { #category : '*Carrefour-Esope' }
 FASTEsopeModel >> carrefourBinderCleaner [
 
-	^ CRFEsopeBindingCleanerVisitor new
+	^ CRFEsopeBindingCleaner new
 ]
 
 { #category : '*Carrefour-Esope' }
