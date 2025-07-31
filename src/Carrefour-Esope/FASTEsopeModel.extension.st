@@ -9,7 +9,7 @@ FASTEsopeModel >> carrefourBinderCleaner [
 { #category : '*Carrefour-Esope' }
 FASTEsopeModel >> carrefourBinderVisitor [
 
-	^ CRFEsopeBinderVisitor new
+	^CRFEsopeBinderVisitor new
 ]
 
 { #category : '*Carrefour-Esope' }

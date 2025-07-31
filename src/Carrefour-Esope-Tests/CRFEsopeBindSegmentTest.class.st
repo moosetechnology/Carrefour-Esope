@@ -5,6 +5,14 @@ Class {
 	#package : 'Carrefour-Esope-Tests'
 }
 
+{ #category : 'tests' }
+CRFEsopeBindSegmentTest >> findEntityNamed: aMooseName in: aFamixModel [
+
+	^aFamixModel entities
+		detect: [ :entity | entity hasUniqueMooseNameInModel and: [ entity name = aMooseName ] ]
+		ifNone: [ nil ]
+]
+
 { #category : 'running' }
 CRFEsopeBindSegmentTest >> jsonImporterClass [
 
@@ -231,7 +239,7 @@ c@_   end segment
       end program
 '.
 
-	(famixModel entityNamed: 'main.book') bindFastModel: fastModel.
+	(self findEntityNamed: 'book' in: famixModel) bindFastModel: fastModel.
 
 	entities := famixModel allWithType: FamixFortranAttribute.
 
