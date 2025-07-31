@@ -231,7 +231,7 @@ c@_   end segment
       end program
 '.
 
-	(famixModel entityNamed: 'book') bindFastModel: fastModel.
+	(famixModel entityNamed: 'main.book') bindFastModel: fastModel.
 
 	entities := famixModel allWithType: FamixFortranAttribute.
 
