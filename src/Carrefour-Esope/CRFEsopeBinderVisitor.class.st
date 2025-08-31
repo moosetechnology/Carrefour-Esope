@@ -82,3 +82,9 @@ CRFEsopeBinderVisitor >> visitFASTEsopeSegsup: aFASTEsopeSegsup [
 
 		self visitFASTEsopeSegCommand: aFASTEsopeSegsup
 ]
+
+{ #category : 'visiting' }
+CRFEsopeBinderVisitor >> visitFASTFortranImplicitRange: aFASTFortranImplicitRange [
+
+	"nothing to do"
+]
