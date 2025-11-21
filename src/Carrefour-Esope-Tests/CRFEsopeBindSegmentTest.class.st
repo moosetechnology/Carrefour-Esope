@@ -211,9 +211,10 @@ c@_   end segment
 	
 	entities := famixModel allWithType: FamixEsopeSegment.
 
-	self assert: entities size equals: 1.
+	self assert: entities size equals: 2.
+	"The first one is the PSTR, which is added to each Esope model."
 
-	fmx := entities anyOne.
+	fmx := entities second.
 
 	fast := fmx fast.
 	self assert: fast isNotNil.
